@@ -1,7 +1,7 @@
-import * as  path from "path";
 import express from 'express';
 import dotenv from 'dotenv';
-import __dirname from "./utils/filePath.js";
+import path from 'path';
+import {fileURLToPath} from 'url';
 import cookieParser from 'cookie-parser';
 import errorHandler from './middleware/error.js';
 
@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Set static folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
 // Mount routers
 app.use('/api/v1/blogs', blogPost);
@@ -37,5 +37,13 @@ app.use('/api/v1/auth', auth);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5080
-
 app.listen(PORT, console.log(`Server running on port ${PORT}`));
+
+app.get("/", (req, res, next) => { 
+ 
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const _retfile = path.join(__dirname, 'index.html');
+   
+    res.sendFile(_retfile);
+   });

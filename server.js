@@ -1,5 +1,7 @@
+import * as  path from "path";
 import express from 'express';
 import dotenv from 'dotenv';
+import __dirname from "./utils/filePath.js";
 import cookieParser from 'cookie-parser';
 import errorHandler from './middleware/error.js';
 
@@ -24,6 +26,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // CookieParser
 app.use(cookieParser());
+
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Mount routers
 app.use('/api/v1/blogs', blogPost);

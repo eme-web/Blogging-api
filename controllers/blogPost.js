@@ -66,7 +66,7 @@ const deleteBlogPost = asyncHandler(async(req, res, next) => {
     let blogPost = await BlogPost.findById({ _id: id});
 
     if(!blogPost){
-        return next(new ErrorResponse("Bootcamp not found", 404));
+        return next(new ErrorResponse("Blog post not found", 404));
     }
 
      //Make sure user is blog post owner

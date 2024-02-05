@@ -1,7 +1,7 @@
 import express from "express";
 import { protect} from "../middleware/auth.js"
 import { createBlogPost, getBlogPost, getBlogPosts, 
-    updateBlogPost, deleteBlogPost } from "../controllers/BlogPost.js";
+    updateBlogPost, deleteBlogPost } from "../controllers/blogPost.js";
 
 
 const router = express.Router();
